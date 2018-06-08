@@ -42,8 +42,12 @@ val conf = new SparkConf().setMaster("local").setAppName("HiveContext") val sc =
 val hiveContext:SQLContext = new HiveContext(sc) 
 hiveContext.setConf("hive.metastore.uris","thrift://ip-172-31-25-51:9083")  
 val prop = new java.util.Properties 
-prop.put("user","root") prop.put("password","root") prop.put("driverClass","com.mysql.jdbc.Driver") val uri = "jdbc:mysql://ip-172-31-25-51:3306/upx" val table = "suicides"  
-val suicides_DF = hiveContext.read.jdbc(uri,table,prop) suicides_DF.createOrReplaceTempView("suicides") suicides_DF.rdd.saveAsTextFile(“/user/ec2-user/folder”)//saving the data in HDFS  
+prop.put("user","root") prop.put("password","root")
+prop.put("driverClass","com.mysql.jdbc.Driver") 
+val uri = "jdbc:mysql://ip-172-31-25-51:3306/upx" val table = "suicides"  
+val suicides_DF = hiveContext.read.jdbc(uri,table,prop) 
+suicides_DF.createOrReplaceTempView("suicides") 
+suicides_DF.rdd.saveAsTextFile(“/user/ec2-user/folder”)            //saving the data in HDFS  
 hiveContext.sql("select * from suicides").show  
 
 5) Executing queries 
@@ -84,6 +88,7 @@ l. Find suicides count cause wise(typecode)
 hiveContext.sql(" select typecode,type,count(total) as suicides  from suicides group by typecode,type").show;  
 
 m. Which is the least cause for suicide  
-hiveContext.sql("select type,count(total) from suicides group by type order by count(total) asc").show;  
-15)List out various Categories of suicidal causes 
-            select typecode,type from suicides group by type,typecode; 
+hiveContext.sql("select type,count(total) from suicides group by type order by count(total) asc").show; 
+
+n.List out various Categories of suicidal causes 
+hiveContext.sql("select typecode,type from suicides group by type,typecode").show;
