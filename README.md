@@ -15,7 +15,7 @@ To build an application to decrease suicides death toll rate using MySQL, Spark 
 
 3. Consists information of State, Year, Type, Gender, Age_group etc
    
-   ![alt text](images/output1)
+   ![alt text](images/output1.png)
    
 # Tools technologies to be used
 
