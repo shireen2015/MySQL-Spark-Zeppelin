@@ -1,5 +1,32 @@
 # MySQL-Spark-Zeppelin
 
+Bring suicide data from MySQL into Spark SQL and analyse it
+
+## Objective
+
+To build an application to decrease suicides death toll rate using MySQL, Spark and Zeppelin.
+
+## Data description
+
+1. Data refers to State/UT-wise distribution of suicide deaths by sex and age group due to causes like physical abuse, bankruptcy,
+   divorce, professional etc.
+
+2. Dataset consists of 237519 rows and 7 columns
+
+3. Consists information of State, Year, Type, Gender, Age_group etc
+   
+   ![alt text](images/output1)
+   
+# Tools technologies to be used
+
+Best suited technologies:
+
+ 1. MySQL
+ 
+ 2. Spark
+ 
+ 3. Zeppelin
+
 ## Loading data to MySQL 
 
 a)  Change the password of root user to avoid errors in Spark SQL while connecting to MySQL.(Login as root user to perform all    operations) 
