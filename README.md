@@ -17,7 +17,7 @@ To build an application to decrease suicides death toll rate using MySQL, Spark 
    
    ![alt text](images/output1.png)
    
-# Tools technologies to be used
+## Tools technologies to be used
 
 Best suited technologies:
 
