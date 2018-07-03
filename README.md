@@ -145,3 +145,15 @@ f) Grant privileges to root user to avoid access denied error in Spark
       n.List out various Categories of suicidal causes 
 
           hiveContext.sql("select typecode,type from suicides group by type,typecode").show;
+          
+          
+  ## Future Possibilities
+  
+  As data is stored in HDFS, MySQL tables, we can explore it in 2 ways:
+
+We can transfer data to Hive tables if any requirement arrives
+
+i) We can connect this data to any Web UIs and generate dashboards
+
+ii) And can share these dashboards to schools, NGOs to control death rates
+
