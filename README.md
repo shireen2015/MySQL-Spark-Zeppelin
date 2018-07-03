@@ -1,28 +1,34 @@
 # MySQL-Spark-Zeppelin
 
-1) Loading data to MySQL 
+## Loading data to MySQL 
 
-a) Change the password of root user to avoid errors in Spark SQL while connecting to MySQL.(Login as root user to perform all    operations) 
+1. Change the password of root user to avoid errors in Spark SQL while connecting to MySQL.(Login as root user to perform all    operations) 
+
 Step 1: Stop the MySQL service /etc/init.d/mysqld stop 
+
 Step 2: Start MySQL without a password after executing below command mysqld_safe --skip-grant-tables & mysql –uroot
-Step 3: Set a new MySQL root password use mysql; update user set password=PASSWORD("root") where User='root'; flush privileges; quit; Step 4: Stop and start MySQL service /etc/init.d/mysqld stop /etc/init.d/mysqld start 
+
+Step 3: Set a new MySQL root password use mysql; update user set password=PASSWORD("root") where User='root'; flush privileges; quit;
+
+Step 4: Stop and start MySQL service /etc/init.d/mysqld stop /etc/init.d/mysqld start 
+
 Step 5: Login to MySQL with new password using below command mysql –u root –p Enter password: 
 
-b) Create a database upx in which create table for the required dataset(here suicides dataset) 
+2. Create a database upx in which create table for the required dataset(here suicides dataset) 
 create database upx; 
 use upx; 
 create table suicides (state varchar(50), year int, typecode varchar(50), type varchar(60), gender varchar(7), agegroup varchar(50),total int); 
 
-c) One cannot directly load the data by placing the dataset in any location. 
+3. One cannot directly load the data by placing the dataset in any location. 
 
 Use the below command to find location to place dataset 
 show variables like "secure_file_prev"; which yields below output 
  Variable_name    | Value                    
  secure_file_priv | /mnt/var/lib/mysql-files/ 
  
-d) Move the dataset to above location hdfs dfs –copyToLocal /user/hue/suicides.csv /mnt/var/lib/mysql-files/ 
+4. Move the dataset to above location hdfs dfs –copyToLocal /user/hue/suicides.csv /mnt/var/lib/mysql-files/ 
 
-e) Load the dataset without header using below command load data infile '/mnt/var/lib/mysql-files/suicides.csv' replace into table suicides fields terminated by ',' lines terminated by '\n' ignore 1 lines;
+5. Load the dataset without header using below command load data infile '/mnt/var/lib/mysql-files/suicides.csv' replace into table suicides fields terminated by ',' lines terminated by '\n' ignore 1 lines;
 
 f) Grant privileges to root user to avoid access denied error in Spark GRANT ALL PRIVILEGES ON *.* TO 'root'@'ip-172-31-25-99.us-west2.compute.internal' IDENTIFIED BY 'root' WITH GRANT OPTION;  
 
